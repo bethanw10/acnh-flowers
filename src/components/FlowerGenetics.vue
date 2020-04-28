@@ -1,28 +1,18 @@
 <template>
     <div>
-        <header>
-            <h1>AC:NH Flower Guide for
-                <select class="flower-select">
-                    <option v-for="flowerType in flowerTypes" :value="selectedFlowerType" v-bind:key="flowerType">
-                        {{flowerType}}
-                    </option>
-                </select>
-            </h1>
-            Mums have three genes, R (red), Y (yellow) and W (white).
-        </header>
         <div class="genotype-form">
-            <genotype-select :genotypes="flowers" v-model="firstFlower"></genotype-select>
+            <genotype-select :flower-type="flowerType" :genotypes="genotypes" v-model="firstFlower"/>
             <span class="plus">➕</span>
-            <genotype-select :genotypes="flowers" v-model="secondFlower"></genotype-select>
+            <genotype-select :flower-type="flowerType" :genotypes="genotypes" v-model="secondFlower"/>
         </div>
         <div class="outcomes">
-            <table>
+            <table v-if="viewType === 'list-view'">
                 <tbody v-for="(colorData, color) in getOutcomes(firstFlower, secondFlower)" v-bind:key="color">
                 <tr class="header-row">
                     <th :rowspan="colorData.outcomes.length + 1">
-                        <flower-image :color="color" v-bind:key="color"/>
+                        <flower-image :color="color" :flower-type="flowerType" v-bind:key="color"/>
                     </th>
-                    <th>{{color}}</th>
+                    <th class="color-header">{{color}}</th>
                     <th>{{colorData.percent}}%</th>
                 </tr>
                 <tr v-for="outcome in colorData.outcomes" v-bind:key="outcome.genotype">
@@ -31,20 +21,19 @@
                 </tr>
                 </tbody>
             </table>
-
-            <div class="outcome-grid" v-if="false && firstFlower && secondFlower">
+            <div class="outcome-grid" v-else-if="firstFlower && secondFlower">
                 <div class="outcome-grid-header"></div>
                 <div class="outcome-grid-header">Color</div>
                 <div class="outcome-grid-header">Chance</div>
                 <div class="outcome-grid-header">Possible Genotypes</div>
                 <template v-for="(colorData, color) in getOutcomes(firstFlower, secondFlower)">
-                    <flower-image :color="color" v-bind:key="color"/>
-                    <div v-bind:key="color">{{color}}</div>
-                    <div v-bind:key="color">{{colorData.percent}}%</div>
+                    <flower-image :color="color" :flower-type="flowerType" v-bind:key="'image-' + color"/>
+                    <div v-bind:key="'color-' + color">{{color}}</div>
+                    <div v-bind:key="'percent-'+ color">{{colorData.percent}}%</div>
                     <div class="outcome-sub-grid" v-bind:key="color">
                         <template v-for="outcome in colorData.outcomes">
-                            <div v-bind:key="outcome.genotype">{{outcome.genotype}}</div>
-                            <div v-bind:key="outcome.genotype">{{outcome.percent}}%</div>
+                            <div v-bind:key="'genotype-' + outcome.genotype">{{outcome.genotype}}</div>
+                            <div v-bind:key="'percent-' + outcome.genotype">{{outcome.percent}}%</div>
                         </template>
                     </div>
                 </template>
@@ -63,158 +52,98 @@
         name: 'flower-genetics',
         components: {GenotypeSelect, FlowerImage},
         mixins: [GeneticsMixin],
-        methods: {
-            displayValue(flower) {
-                // 160 is a non-breaking space
-                // Selects don't allow 'whitespace: pre' that allows multiple spaces so we have to do this instead
-                let colour = (flower.color).padEnd(7, String.fromCharCode(160));
-                return `${colour} ${flower.genotype}${flower.origin ? ` (${flower.origin})` : ''}`;
-            },
-            flowerBackground(color) {
-                let hexColors = {
-                    ["Red"]: "#e8645a",
-                    ["Pink"]: "#f2c8b8",
-                    ["White"]: "#FFF",
-                    ["Purple"]: "#a77ba8",
-                    ["Green"]: "#7fd47b",
-                    ["Yellow"]: "#e8e46f"
-                };
-                return hexColors[color];
-            },
+        props: {
+            flowerType: String,
+            viewType: String,
+            genotypes: Array
         },
         data: function () {
             return {
-                selectedFlowerType: 'Roses',
-                flowerTypes: ["Roses", "Mums", "Cosmos", "Lilies", "Pansies", "Hyacinths", "Tulips", "Windflowers"],
                 firstFlower: '',
                 secondFlower: '',
-                flowers: [
-                    {genotype: "RRyyWW", color: "Red", origin: "seed"},
-                    {genotype: "RRyyWw", color: "Red"},
-                    {genotype: "RRyyww", color: "Red"},
-                    {genotype: "RrYyWw", color: "Red"},
-                    {genotype: "RRYyww", color: "Red"},
-                    {genotype: "RRYYww", color: "Red"},
-
-                    {genotype: "rrYyww", color: "White"},
-                    {genotype: "rryyWW", color: "White"},
-                    {genotype: "rryyWw", color: "White", origin: "seed"},
-
-                    {genotype: "rrYyWW", color: "Yellow"},
-                    {genotype: "rrYyWw", color: "Yellow"},
-                    {genotype: "rrYYWW", color: "Yellow", origin: "seed"},
-                    {genotype: "rrYYWw", color: "Yellow"},
-                    {genotype: "rrYYww", color: "Yellow"},
-                    {genotype: "RrYyWW", color: "Yellow"},
-
-                    {genotype: "RryyWW", color: "Pink"},
-                    {genotype: "RryyWw", color: "Pink"},
-                    {genotype: "Rryyww", color: "Pink"},
-                    {genotype: "RrYyww", color: "Pink", origin: "mystery island"},
-
-                    {genotype: "rryyww", color: "Purple"},
-                    {genotype: "RrYYWW", color: "Purple"},
-                    {genotype: "RrYYWw", color: "Purple"},
-                    {genotype: "RrYYww", color: "Purple"},
-                    {genotype: "RRYyWW", color: "Purple"},
-                    {genotype: "RRYyWw", color: "Purple", origin: "mystery island"},
-
-                    {genotype: "RRYYWW", color: "Green"},
-                    {genotype: "RRYYWw", color: "Green"}
-                ]
+            }
+        },
+        watch: {
+            flowerType: function () {
+                this.firstFlower = '';
+                this.secondFlower = '';
             }
         }
     }
 </script>
 
 <style scoped>
-  * {
-    box-sizing: border-box;
-  }
+    * {
+        box-sizing: border-box;
+    }
 
-  header {
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: normal;
-    text-align: center;
-    margin-top: 20px;
-  }
+    .genotype-form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 50px 0;
+    }
 
-  h1 {
-    display: flex;
-    justify-content: center;
-  }
+    .plus {
+        margin: 0 20px;
+    }
 
-  .flower-select {
-    font-family: 'Montserrat', sans-serif;
-    text-transform: uppercase;
-    font-size: 20px;
-    margin-left: 10px;
-  }
+    /*List view*/
+    table {
+        border-spacing: 0;
+    }
 
-  .genotype-form {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 50px 0;
-  }
+    tbody::after
+    {
+        content: '';
+        display: block;
+        height: 30px;
+    }
 
-  .plus {
-    margin: 0 20px;
-  }
+    td, th {
+        text-align: left;
+    }
 
-  /*List view*/
-  table {
-    border-spacing: 0;
-  }
+    td {
+        padding:  3px 20px;
+    }
 
-  tbody::after
-  {
-    content: '';
-    display: block;
-    height: 30px;
-  }
+    th {
+        padding: 3px 20px;
+        font-size: 18px;
+        font-weight: bold;
+    }
 
-  td, th {
-    text-align: left;
-  }
+    .color-header {
+        min-width: 150px;
+    }
 
-  td {
-    padding:  3px 20px;
-  }
+    /*Grid view*/
+    .outcomes {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-  th {
-    padding: 3px 20px;
-    font-size: 18px;
-    font-weight: bold;
-  }
+    .outcome-grid {
+        max-width: 500px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        align-items: center;
+        grid-gap: 30px 25px;
+        text-align: center;
+    }
 
-  /*Grid view*/
-  .outcomes {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+    .outcome-grid-header {
+        font-weight: bold;
+        text-transform: uppercase;
+        margin: 0 0 -20px 0;
+    }
 
-  .outcome-grid {
-    width: 25vw;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    align-items: center;
-    grid-gap: 30px 25px;
-    text-align: center;
-  }
-
-  .outcome-grid-header {
-    font-weight: bold;
-    text-transform: uppercase;
-    margin: 0 0 -20px 0;
-  }
-
-  .outcome-sub-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 10px 25px;
-    text-align: start;
-  }
+    .outcome-sub-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px 25px;
+        text-align: start;
+    }
 </style>

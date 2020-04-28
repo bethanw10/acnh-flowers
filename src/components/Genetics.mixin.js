@@ -5,11 +5,12 @@ export const GeneticsMixin = {
                 return '';
             }
 
-            var combinations = this.genotypeCombinations(flower1.genotype, flower2.genotype);
-            var totalCombinations = combinations.length;
+            let combinations = this.genotypeCombinations(flower1.genotype, flower2.genotype);
+            let totalCombinations = combinations.length;
 
-            var outcomeData = {};
+            let outcomeData = {};
 
+            // Group by genotype and count number of occurrences
             for (let combination of combinations) {
                 if (combination in outcomeData) {
                     outcomeData[combination].total += 1;
@@ -18,12 +19,14 @@ export const GeneticsMixin = {
                 }
             }
 
-            var groupedByColor = {};
+            let groupedByColor = {};
 
             // :/
+            // Calculate each genotypes percent chance of occurring
+            // Group by colour and sum up each color's overall chance of occurring
             for (let key in outcomeData) {
                 outcomeData[key].percent = (outcomeData[key].total / totalCombinations) * 100;
-                var color = this.flowers.find(f => f.genotype === key).color;
+                let color = this.genotypes.find(f => f.genotype === key).color;
 
                 if (color in groupedByColor) {
                     groupedByColor[color].outcomes.push(
@@ -43,19 +46,15 @@ export const GeneticsMixin = {
             return groupedByColor;
         },
         genotypeCombinations(genotype1, genotype2) {
-            let redGenes = this.geneCombinations(
-                genotype1.slice(0, 2),
-                genotype2.slice(0, 2));
+            let genes1 = genotype1.match(/.{1,2}/g);
+            let genes2 = genotype2.match(/.{1,2}/g);
 
-            let yellowGenes = this.geneCombinations(
-                genotype1.slice(2, 4),
-                genotype2.slice(2, 4));
+            let combinedGenesArray = [];
+            for (let i = 0; i < genes1.length; i++) {
+                combinedGenesArray.push(this.geneCombinations(genes1[i], genes2[i]));
+            }
 
-            let whiteGenes = this.geneCombinations(
-                genotype1.slice(4, 6),
-                genotype2.slice(4, 6));
-
-            return this.arrayCombinations([redGenes, yellowGenes, whiteGenes]);
+            return this.arrayCombinations(combinedGenesArray);
         },
         geneCombinations(gene1, gene2) {
             let genes = [];
@@ -75,10 +74,10 @@ export const GeneticsMixin = {
                 return arrays[0];
             }
 
-            var result = [];
-            var allCasesOfRest = this.arrayCombinations(arrays.slice(1));  // recur with the rest of array
-            for (var i = 0; i < allCasesOfRest.length; i++) {
-                for (var j = 0; j < arrays[0].length; j++) {
+            let result = [];
+            let allCasesOfRest = this.arrayCombinations(arrays.slice(1));  // recur with the rest of array
+            for (let i = 0; i < allCasesOfRest.length; i++) {
+                for (let j = 0; j < arrays[0].length; j++) {
                     result.push(arrays[0][j] + allCasesOfRest[i]);
                 }
             }
@@ -86,7 +85,3 @@ export const GeneticsMixin = {
         }
     }
 };
-
-export default {
-  GeneticsMixin
-}

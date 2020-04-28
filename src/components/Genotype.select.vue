@@ -1,13 +1,13 @@
 <template>
     <div class="genotype-select">
-        <flower-image :color="selectedGenotype.color"></flower-image>
+        <flower-image :color="selectedGenotype.color" :flowerType="flowerType"/>
 
         <div class="container">
             <label class="label">First flower</label>
             <select class="dropdown" v-model="selectedGenotype" v-on:change="updateValue()">
                 <option value="" disabled hidden>Select a genotype</option>
-                <option v-for="(flower, index) in genotypes" v-bind:value="flower" v-bind:key="index"
-                        :style="{ backgroundColor: flowerBackground(flower.color)}">
+                <option v-for="(flower, index) in genotypes" v-bind:key="index" v-bind:value="flower"
+                        :style="{ backgroundColor: flowerBackground(flower.color) }">
                     {{displayValue(flower)}}
                 </option>
             </select>
@@ -22,7 +22,8 @@
         name: "genotype-select",
         components: {FlowerImage},
         props: {
-          genotypes: Array
+            flowerType: String,
+            genotypes: Array
         },
         data: function() {
             return {
@@ -42,6 +43,8 @@
             flowerBackground(color) {
                 let hexColors = {
                     ["Red"]: "#e8645a",
+                    ["Orange"]: "#e8a75a",
+                    ["Black"]: "#868382",
                     ["Pink"]: "#f2c8b8",
                     ["White"]: "#FFF",
                     ["Purple"]: "#a77ba8",
@@ -50,16 +53,10 @@
                 };
                 return hexColors[color];
             },
-            flowerImage(color) {
-                let hexColors = {
-                    ["Red"]: "https://acnhcdn.com/latest/MenuIcon/PltMum2.png",
-                    ["Pink"]: "https://acnhcdn.com/latest/MenuIcon/PltMum3.png",
-                    ["White"]: "https://acnhcdn.com/latest/MenuIcon/PltMum0.png",
-                    ["Purple"]: "https://acnhcdn.com/latest/MenuIcon/PltMum5.png",
-                    ["Green"]: "https://acnhcdn.com/latest/MenuIcon/PltMum4.png",
-                    ["Yellow"]: "https://acnhcdn.com/latest/MenuIcon/PltMum1.png"
-                };
-                return hexColors[color];
+        },
+        watch: {
+            flowerType: function () {
+                this.selectedGenotype = '';
             }
         }
     }

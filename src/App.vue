@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import FlowerGenetics from "./components/FlowerGenetics";
+import FlowerGenetics from "./components/FlowerGuide";
 
 export default {
   name: 'App',
