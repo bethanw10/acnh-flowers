@@ -6,17 +6,11 @@
             <genotype-select label= "Second flower" :flower-type="flowerType" :genotypes="genotypes" v-model="secondFlower"/>
         </div>
         <div class="outcomes">
-            <div class="punnett-squares" v-if="viewType === 'punnett-squares' && firstFlower && secondFlower">
-                <div class="punnett-square" v-for="(combination, index) in allGeneCombinations(firstFlower.genotype, secondFlower.genotype)"
-                     :key="index">
-                    <table>
-                        <tr><td></td> <td>{{firstFlower.genotype[index * 2]}}</td> <td>{{firstFlower.genotype[index*2 + 1]}}</td></tr>
-                        <tr><td>{{secondFlower.genotype[index*2]}}</td> <td>{{combination[0]}}</td><td>{{combination[2]}}</td></tr>
-                        <tr><td>{{secondFlower.genotype[index*2 + 1]}}</td> <td>{{combination[1]}}</td><td>{{combination[3]}}</td></tr>
-                        <tr><td></td><td colspan="3">{{uniqueCombinations(combination).join(', ')}}</td></tr>
-                    </table>
-                </div>
-            </div>
+            <PunnetSquares
+                    v-if="viewType === 'punnett-squares' && firstFlower && secondFlower"
+                    :genotype1="firstFlower.genotype"
+                    :genotype2="secondFlower.genotype"/>
+
             <table class="outcome-table" v-if="viewType === 'list-view' || viewType === 'punnett-squares'">
                 <tbody v-for="(colorData, color) in getOutcomes(firstFlower, secondFlower)" v-bind:key="color">
                 <tr class="header-row">
@@ -27,11 +21,12 @@
                     <th>{{colorData.percent}}%</th>
                 </tr>
                 <tr v-for="outcome in colorData.outcomes" v-bind:key="outcome.genotype">
-                    <td>{{outcome.genotype}}</td>
+                    <td>{{outcome.genotype.match(/(.{2})/g).join(' ')}}</td>
                     <td>{{outcome.percent}}%</td>
                 </tr>
                 </tbody>
             </table>
+
             <div class="outcome-grid" v-else-if="firstFlower && secondFlower">
                 <div class="outcome-grid-header"></div>
                 <div class="outcome-grid-header">Color</div>
@@ -43,7 +38,7 @@
                     <div v-bind:key="'percent-'+ color">{{colorData.percent}}%</div>
                     <div class="outcome-sub-grid" v-bind:key="color">
                         <template v-for="outcome in colorData.outcomes">
-                            <div v-bind:key="'genotype-' + outcome.genotype">{{outcome.genotype}}</div>
+                            <div v-bind:key="'genotype-' + outcome.genotype">{{outcome.genotype.match(/(.{2})/g).join(' ')}}</div>
                             <div v-bind:key="'percent-' + outcome.genotype">{{outcome.percent}}%</div>
                         </template>
                     </div>
@@ -56,12 +51,13 @@
 <script>
     import GenotypeSelect from "./Genotype.select.vue"
     import FlowerImage from "./FlowerImage";
+    import PunnetSquares from "./PunnetSquares";
 
     import { GeneticsMixin } from "./Genetics.mixin"
 
     export default {
         name: 'flower-genetics',
-        components: {GenotypeSelect, FlowerImage},
+        components: {GenotypeSelect, FlowerImage, PunnetSquares},
         mixins: [GeneticsMixin],
         props: {
             flowerType: String,
@@ -104,6 +100,9 @@
         margin: 0 20px;
     }
 
+    .punnett-squares {
+        margin-bottom: 30px;
+    }
 
     /*List view*/
     .outcome-table table {

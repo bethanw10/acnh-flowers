@@ -60,8 +60,8 @@ export const GeneticsMixin = {
         geneCombinations(gene1, gene2) {
             let genes = [];
 
-            for (const c1 of gene1) {
-                for (const c2 of gene2) {
+            for (const c1 of gene2) {
+                for (const c2 of gene1) {
                     // Order dominant gene first. Upper case characters have a lower value?
                     genes.push((c1 < c2) ? (c1 + c2) : (c2 + c1));
                 }

@@ -15,31 +15,64 @@
                 </select>)
             </h1>
             <div class="description">
-                {{flowerData[selectedFlowerType].description}} <br/> <br/>
-                Flowers have a number of genes that control their color - usually 3 expect for roses which have 4.<br/>
-                A gene is made of a pair of alleles which can be dominant (represented by a uppercase letter) or recessive (represented by a lowercase letter).<br/>
-                When cross breeding flowers, one allele is taken from each parent at random for each gene. The possible outcomes can be predicted using a Punnett square (link):
-                <div class="punnett-square">
-                    <table>
-                        <tr><td> </td> <td>R</td> <td>r</td></tr>
-                        <tr><td>r</td> <td>Rr</td><td>rr</td></tr>
-                        <tr><td>r</td> <td>Rr</td><td>rr</td></tr>
-                        <tr><td></td><td colspan="3">R</td></tr>
-                    </table>
-                </div>
+                <p> {{flowerData[selectedFlowerType].description}}</p>
+                <p>
+                    Flowers have a number of genes that control their color - usually 3, expect for roses which have 4.
+                    A gene is made of a pair of alleles which can be dominant (represented by a uppercase letter) or recessive (represented by a lowercase letter).
+                </p>
+                <p>
+                    When cross breeding flowers, one allele is taken from each parent at random for each gene. The possible outcomes can be predicted using a
+                    <a href="https://en.wikipedia.org/wiki/Punnett_square"> Punnett square.</a>
+                </p>
+                <p>For example, when breeding two flowers where both flowers have the gene 'Rr':</p>
+                <PunnetSquares genotype1="Rr" genotype2="Rr"/>
+                <p>The possible outcomes for this pair are RR, Rr and rr. Since Rr appears twice in the square it has a 50% chance of occurring, while RR and rr have a 25% chance.</p>
 
-                <br/>
-                Notes:
-                <br/>
+                <p>Flower from seed bags and mystery island flowers will always have the same genes.
+                    It's helpful to start cross breeding with these flowers so you can more easily track what genes your flowers have.</p>
+
+                <h4>Notes:</h4>
                 <ul>
-                    <li>For two flowers to breed they must touch horizontally, vertically or diagonally, have been watered and there is an empty spot next to one of the parents</li>
-                    <li> Flowers can clone if they are on their own or if all flowers that it’s touching have already bred with different partners. Clones will have the exact same genes as their parent</li>
-                    <li>Flower from seed bags and mystery island flowers always have the same genes. It's helpful to start cross breeding with these flowers so you can more easily track what genes your flowers have</li>
+                    <li>For two flowers to breed they must: touch horizontally, vertically or diagonally, have been watered and have an empty spot next to one of the parents</li>
+                    <li>Flowers can clone if they are on their own or if all flowers that it’s touching have already bred with different partners. Clones will have the exact same genes as their parent</li>
                     <li>Colors don't necessarily work the same way between flowers e.g. a RRYYSS cosmo is Red but a RRYYSS Lily is white</li>
-                    <li>Watering flower 5 people higher chance of breeding</li>
+                    <li>Visitors watering your flowers increases their chances of spawning new flowers <a href="https://media.discordapp.net/attachments/694317725190717440/702969678200438844/flower_production.png">(more info)</a></li>
                     <li>There's no cap on the number of new flowers spawned each day - but each flower can only breed once per day</li>
-                    <li>Golden roses have a unique requirement - water a black rose with a golden watering can</li>
+                    <li>Golden roses have a unique requirement - you need to water a black rose with a golden watering can. Golden roses also can't clone themselves</li>
                 </ul>
+
+                <h4>Useful links</h4>
+                <ul>
+                    <li>
+                        <a href="https://imgur.com/a/ptCPgVK">ACNH Hybrid Guide: Full collection</a><br/>
+                        Full list of guides by peach-n-key, including how to get every flower color
+                    </li>
+                    <li>
+                        <a href="https://docs.google.com/document/d/1P0mJsxET4zaZxk2CqrKtorVI8GEavPHzy5lj2ZdV-nE/preview">Flower Layouts and Placements</a><br/>
+                        A very useful layout guide. Explains why the checkerboard method isn't the best to use
+                    </li>
+                    <li>
+                        <a href="https://docs.google.com/document/u/0/d/1ARIQCUc5YVEd01D7jtJT9EEJF45m07NXhAm4fOpNvCs/mobilebasic">ACNH/ACNL Advanced Flower Genetics </a><br/>
+                        A more in depth guide into the flower breeding mechanics, including a technical explanantion an how genes are represented in game
+                    </li>
+                    <li>
+                        <a href="https://docs.google.com/spreadsheets/u/0/d/11pRCX8G0xGizSYWgVhoUSu7pE-MV7AOprBcgSY1whB4/htmlview#">ACNH/ACNL Flower Genes</a> <br/>
+                        Spreadsheet of all the possible flower colors and their genotypes
+                    </li>
+                    <li>
+                        <a href="https://docs.google.com/document/d/1XPAaPUvGMWQ-n5sBLV3jM78QKxqKjiGCzx5HnD7K5RI/preview">Garden FAQ</a><br/>
+                        Long list of FAQs about flower breeding
+                    </li>
+                    <li>
+                        <a href="https://aeonsake.gitlab.io/acnh-flower-breeder/">Flower Breeding Simulator</a><br/>
+                        Very useful for planning layouts!
+                    </li>
+                    <li>
+                        <a href="https://aiterusawato.github.io/guides/acnh/flowers.html#bookcomplete-list-of-genotypes">Flowers — The Complete Guide</a><br/>
+                        A lot of useful information on flowers, also includes some information on weed mechanices
+                    </li>
+                </ul>
+
             </div>
 
         </header>
@@ -53,10 +86,11 @@
 
 <script>
     import FlowerGenetics from "./FlowerGenetics";
+    import PunnetSquares from "./PunnetSquares";
 
     export default {
         name: "FlowerGuide",
-        components: {FlowerGenetics},
+        components: {FlowerGenetics, PunnetSquares},
         data : function() {
             return {
                 selectedFlowerType: "Mums",
@@ -392,7 +426,6 @@
 </script>
 
 <style>
-
     h1 {
         letter-spacing: 2px;
         text-transform: uppercase;
@@ -404,6 +437,11 @@
 
     .description {
         max-width: 50vw;
+        line-height: 20px;
+    }
+
+    .description li {
+        margin: 18px 0;
     }
 
     .option-select {
@@ -414,53 +452,4 @@
         margin: 0 10px;
     }
 
-
-    .punnett-squares {
-        display: flex;
-        margin-bottom: 30px;
-    }
-
-    .punnett-square {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .punnett-square table {
-        text-align: center;
-        border-collapse: collapse;
-        border-spacing: 0;
-        margin: 0 10px;
-    }
-
-    .punnett-square table tr:first-child td, .punnett-square table tr:last-child td{
-        border: none;
-        border-right: 2px solid #d2d2d2;
-        border-bottom: 2px solid #d2d2d2;
-        height: auto;
-        font-weight: bold;
-        padding: 5px;
-        background: none;
-    }
-
-    .punnett-square table tr:last-child td {
-        border: none;
-    }
-
-    .punnett-square table td:nth-child(1) {
-        border: none;
-        border-bottom: 2px solid #d2d2d2;
-        width: auto;
-        font-weight: bold;
-        padding: 5px;
-        background: none;
-    }
-
-    .punnett-square td {
-        border: 2px solid #d2d2d2;
-        background: #f5f5f5;
-        padding: 2px;
-        height: 42px;
-        width: 42px;
-    }
 </style>

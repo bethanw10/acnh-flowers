@@ -25,6 +25,11 @@ export default {
     display: flex;
   }
 
+  a {
+    color: #42b983;
+    font-weight: bold;
+  }
+
   #app {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
