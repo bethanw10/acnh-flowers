@@ -6,7 +6,7 @@
             <genotype-select label= "Second flower" :flower-type="flowerType" :genotypes="genotypes" v-model="secondFlower"/>
         </div>
         <div class="outcomes">
-            <PunnetSquares
+            <PunnettSquares
                     v-if="viewType === 'punnett-squares' && firstFlower && secondFlower"
                     :genotype1="firstFlower.genotype"
                     :genotype2="secondFlower.genotype"/>
@@ -51,13 +51,13 @@
 <script>
     import GenotypeSelect from "./Genotype.select.vue"
     import FlowerImage from "./FlowerImage";
-    import PunnetSquares from "./PunnetSquares";
+    import PunnettSquares from "./PunnettSquares";
 
     import { GeneticsMixin } from "./Genetics.mixin"
 
     export default {
         name: 'flower-genetics',
-        components: {GenotypeSelect, FlowerImage, PunnetSquares},
+        components: {GenotypeSelect, FlowerImage, PunnettSquares},
         mixins: [GeneticsMixin],
         props: {
             flowerType: String,
