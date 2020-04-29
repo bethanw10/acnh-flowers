@@ -148,7 +148,7 @@
     .outcome-grid {
         max-width: 500px;
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(4, auto);
         align-items: center;
         grid-gap: 30px 25px;
         text-align: center;
