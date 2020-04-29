@@ -3,7 +3,7 @@
         <flower-image :color="selectedGenotype.color" :flowerType="flowerType"/>
 
         <div class="container">
-            <label class="label">First flower</label>
+            <label class="label">{{label}}</label>
             <select class="dropdown" v-model="selectedGenotype" v-on:change="updateValue()">
                 <option value="" disabled hidden>Select a genotype</option>
                 <option v-for="(flower, index) in genotypes" v-bind:key="index" v-bind:value="flower"
@@ -22,8 +22,9 @@
         name: "genotype-select",
         components: {FlowerImage},
         props: {
+            label: String,
             flowerType: String,
-            genotypes: Array
+            genotypes: Array,
         },
         data: function() {
             return {
@@ -37,8 +38,9 @@
             displayValue(flower) {
                 // 160 is a non-breaking space
                 // Selects don't allow 'whitespace: pre' that allows multiple spaces so we have to do this instead
-                let colour = (flower.color).padEnd(7, String.fromCharCode(160));
-                return `${colour} ${flower.genotype}${flower.origin ? ` (${flower.origin})` : ''}`;
+                let colour = (flower.color).padEnd(6, String.fromCharCode(160));
+                let genotype = flower.genotype.match(/(.{2})/g).join(' ');
+                return `${colour} ${genotype}${flower.origin ? ` (${flower.origin})` : ''}`;
             },
             flowerBackground(color) {
                 let hexColors = {
@@ -49,7 +51,8 @@
                     ["White"]: "#FFF",
                     ["Purple"]: "#a77ba8",
                     ["Green"]: "#7fd47b",
-                    ["Yellow"]: "#e8e46f"
+                    ["Yellow"]: "#e8e46f",
+                    ["Blue"]: "#4a8fff"
                 };
                 return hexColors[color];
             },

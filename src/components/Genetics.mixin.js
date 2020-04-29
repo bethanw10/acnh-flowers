@@ -5,7 +5,8 @@ export const GeneticsMixin = {
                 return '';
             }
 
-            let combinations = this.genotypeCombinations(flower1.genotype, flower2.genotype);
+            let geneCombinations = this.allGeneCombinations(flower1.genotype, flower2.genotype);
+            let combinations = this.arrayCombinations(geneCombinations);
             let totalCombinations = combinations.length;
 
             let outcomeData = {};
@@ -45,7 +46,7 @@ export const GeneticsMixin = {
 
             return groupedByColor;
         },
-        genotypeCombinations(genotype1, genotype2) {
+        allGeneCombinations(genotype1, genotype2) {
             let genes1 = genotype1.match(/.{1,2}/g);
             let genes2 = genotype2.match(/.{1,2}/g);
 
@@ -54,7 +55,7 @@ export const GeneticsMixin = {
                 combinedGenesArray.push(this.geneCombinations(genes1[i], genes2[i]));
             }
 
-            return this.arrayCombinations(combinedGenesArray);
+            return combinedGenesArray;
         },
         geneCombinations(gene1, gene2) {
             let genes = [];

@@ -1,12 +1,23 @@
 <template>
     <div>
         <div class="genotype-form">
-            <genotype-select :flower-type="flowerType" :genotypes="genotypes" v-model="firstFlower"/>
+            <genotype-select label="First flower" :flower-type="flowerType" :genotypes="genotypes" v-model="firstFlower"/>
             <span class="plus">➕</span>
-            <genotype-select :flower-type="flowerType" :genotypes="genotypes" v-model="secondFlower"/>
+            <genotype-select label= "Second flower" :flower-type="flowerType" :genotypes="genotypes" v-model="secondFlower"/>
         </div>
         <div class="outcomes">
-            <table v-if="viewType === 'list-view'">
+            <div class="punnett-squares" v-if="viewType === 'punnett-squares' && firstFlower && secondFlower">
+                <div class="punnett-square" v-for="(combination, index) in allGeneCombinations(firstFlower.genotype, secondFlower.genotype)"
+                     :key="index">
+                    <table>
+                        <tr><td></td> <td>{{firstFlower.genotype[index * 2]}}</td> <td>{{firstFlower.genotype[index*2 + 1]}}</td></tr>
+                        <tr><td>{{secondFlower.genotype[index*2]}}</td> <td>{{combination[0]}}</td><td>{{combination[2]}}</td></tr>
+                        <tr><td>{{secondFlower.genotype[index*2 + 1]}}</td> <td>{{combination[1]}}</td><td>{{combination[3]}}</td></tr>
+                        <tr><td></td><td colspan="3">{{uniqueCombinations(combination).join(', ')}}</td></tr>
+                    </table>
+                </div>
+            </div>
+            <table class="outcome-table" v-if="viewType === 'list-view' || viewType === 'punnett-squares'">
                 <tbody v-for="(colorData, color) in getOutcomes(firstFlower, secondFlower)" v-bind:key="color">
                 <tr class="header-row">
                     <th :rowspan="colorData.outcomes.length + 1">
@@ -63,6 +74,11 @@
                 secondFlower: '',
             }
         },
+        methods: {
+            uniqueCombinations(combination) {
+                return [...new Set(combination)];
+            }
+        },
         watch: {
             flowerType: function () {
                 this.firstFlower = '';
@@ -81,34 +97,39 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 50px 0;
+        margin: 30px 0;
     }
 
     .plus {
         margin: 0 20px;
     }
 
+
     /*List view*/
-    table {
+    .outcome-table table {
         border-spacing: 0;
     }
 
-    tbody::after
+    .outcome-table tbody::after
     {
         content: '';
         display: block;
         height: 30px;
     }
 
-    td, th {
+    .outcome-table tbody:last-child::after {
+        display: none;
+    }
+
+    .outcome-table td, th {
         text-align: left;
     }
 
-    td {
+    .outcome-table td {
         padding:  3px 20px;
     }
 
-    th {
+    .outcome-table th {
         padding: 3px 20px;
         font-size: 18px;
         font-weight: bold;
