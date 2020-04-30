@@ -6,7 +6,13 @@
                 <tr><td></td>                           <td>{{genotype1[index*2]}}</td> <td>{{genotype1[index*2 + 1]}}</td></tr>
                 <tr><td>{{genotype2[index*2]}}</td>     <td>{{combination[0]}}</td>     <td>{{combination[1]}}</td></tr>
                 <tr><td>{{genotype2[index*2 + 1]}}</td> <td>{{combination[2]}}</td>     <td>{{combination[3]}}</td></tr>
-                <tr><td></td><td colspan="3">{{uniqueCombinations(combination).join(', ')}}</td></tr>
+                <tr><td></td>
+                    <td colspan="3">
+                        <template v-for="(outcome, gene) in outcomeTotals(combination)">
+                            <span :key="gene"><b>{{gene}}</b> {{outcome.percent}}%<br/></span>
+                        </template>
+                     </td>
+                </tr>
             </table>
         </div>
     </div>
@@ -23,8 +29,14 @@
             genotype2: String,
         },
         methods: {
-            uniqueCombinations(combination) {
-                return [...new Set(combination)];
+            outcomeTotals(combination) {
+                let outcomes = this.groupByNumOccurrences(combination);
+
+                for (let key in outcomes) {
+                    outcomes[key].percent = (outcomes[key].total / 4) * 100;
+                }
+
+                return outcomes;
             }
         }
     }
@@ -62,6 +74,7 @@
 
     .punnett-square table tr:last-child td {
         border: none;
+        font-weight: normal;
     }
 
     .punnett-square table td:nth-child(1) {

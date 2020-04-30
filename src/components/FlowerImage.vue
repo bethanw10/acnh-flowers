@@ -107,6 +107,6 @@
         height: 60px;
         padding: 5px;
         border-radius: 30px;
-        background-color: #edf2f2;
+        background-color: #f5f5f5;
     }
 </style>

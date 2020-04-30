@@ -25,8 +25,8 @@
                 <div class="explanation-body" v-show="openExplanation">
                     <p>
                         Flowers have a number of genes that control their color.
-                        Most flowers use <strong>R (red)</strong>, <strong>(Y) yellow</strong> and <strong>(W) white</strong>.
-                        Roses are unique because they make use of the 4th gene - <strong> S (Shade) </strong>.
+                        Most flowers use <strong>R (red)</strong>, <strong>Y (yellow)</strong> and <strong>W (white)</strong>.
+                        Roses are unique because they also make use of the 4th gene - <strong> S (Shade) </strong>.
                         A gene is made of a pair of alleles which can be dominant (represented by a uppercase letter) or recessive (represented by a lowercase letter).
                         For example, a dominant red gene is written as <strong>R</strong>, and a recessive red gene is written as <strong>r</strong>.
                     </p>
@@ -34,14 +34,37 @@
                         When cross breeding flowers, one allele is taken from each parent at random for each gene. The possible outcomes can be predicted using a
                         <a href="https://en.wikipedia.org/wiki/Punnett_square"> Punnett square.</a>
                     </p>
-                    <p>For example, when breeding two flowers where both flowers have the gene 'Rr':</p>
+                    <p>For example, when breeding two flowers where both flowers have the gene <strong>'Rr'</strong>:</p>
                     <PunnettSquares genotype1="Rr" genotype2="Rr"/>
-                    <p>The possible outcomes for this pair are RR, Rr and rr. Since Rr appears twice in the square it has a 50% chance of occurring, while RR and rr have a 25% chance.</p>
+                    <p>The possible outcomes for this pair are <strong>RR, Rr and rr</strong>. Since Rr appears in 2 of the 4 squares it has a 50% chance of occurring, while RR and rr have a 25% chance.</p>
 
-                    <p>This is done for each gene to work out what the final genotype is.</p>
+                    <p>To work out all the possible outcomes for two flowers, you can start by drawing a punnet square for each gene.
+                        For example if you bred a yellow cosmo with the genotype <strong>RR yy Ww</strong> with a orange cosmo with the genotype <strong>RR Yy WW</strong>:</p>
 
-                    <p>Flower from seed bags and mystery island flowers will always have the same genes.
-                        It's helpful to start cross breeding with these flowers so you can more easily track what genes your flowers have.</p>
+                    <PunnettSquares genotype1="rrYYSs" genotype2="RRYySs"/>
+
+                    <table class="forked-line" v-if="false">
+                        <tr><td rowspan="6"><b>Rr</b> (1)</td><td rowspan="3"><b>YY</b>(1/2)</td><td><b>SS</b> (1/4)</td> <td><b>RR YY SS</b> (1/8)</td> </tr>
+                        <tr>                                                        <td><b>Ss</b> (1/2)</td> <td><b>RR YY Ss</b> (1/4)</td> </tr>
+                        <tr>                                                        <td><b>ss</b> (1/4)</td> <td><b>RR YY ss</b> (1/8)</td> </tr>
+                        <tr>                           <td rowspan="3"><b>Yy</b> (1/2)</td><td><b>SS</b> (1/4)</td> <td><b>RR Yy SS</b> (1/4)</td> </tr>
+                        <tr>                                                        <td><b>Ss</b> (1/2)</td> <td><b>RR Yy Ss</b> (1/4)</td> </tr>
+                        <tr>                                                        <td><b>ss</b> (1/4)</td> <td><b>RR Yy ss</b> (1/8)</td> </tr>
+                    </table>
+
+                    <p>These combination of these genes can result in these flowers:</p>
+
+                    <div class="grid-view">
+                        <ListView flower-type="Cosmos"
+                                  :outcomes="getOutcomes('rrYYSs', 'RRYySs', flowerData['Cosmos'].genotypes)" />
+                    </div>
+
+                    <p>Unfortunately, there's no easy way to check a flower's genotype in game. If you breed the flowers shown above to get an orange flower,
+                    it could have any of the genotypes listed under Orange. In some blue rose guides, you'll need to check if the flower you've bred is the right one
+                        by breeding it with a certain color to see what color offspring it produces <a href="https://i.imgur.com/f1nET1S.png">(example)</a>.</p>
+
+                    <p>However, flowers from seed bags and mystery island flowers will always have the same genes.
+                        It's helpful to start cross breeding with these flowers so you can track what genes your flowers have.</p>
 
                     <h4>Notes:</h4>
                     <ul>
@@ -57,23 +80,23 @@
                     <ul>
                         <li>
                             <a href="https://imgur.com/a/ptCPgVK">ACNH Hybrid Guide: Full collection</a><br/>
-                            Full list of guides by peach-n-key, including how to get every flower color
+                            Full list of guides by peach-n-key, including how to get every flower color. The blue rose guide is especially helpful.
                         </li>
                         <li>
                             <a href="https://docs.google.com/document/d/1P0mJsxET4zaZxk2CqrKtorVI8GEavPHzy5lj2ZdV-nE/preview">Flower Layouts and Placements</a><br/>
-                            A very useful layout guide. Explains why the checkerboard method isn't the best to use
+                            A very useful layout guide. Explains why the checkerboard method isn't the best to use.
                         </li>
                         <li>
                             <a href="https://docs.google.com/document/u/0/d/1ARIQCUc5YVEd01D7jtJT9EEJF45m07NXhAm4fOpNvCs/mobilebasic">ACNH/ACNL Advanced Flower Genetics </a><br/>
-                            A more in depth guide into the flower breeding mechanics, including a technical explanation an how genes are represented in game
+                            A more in depth guide into the flower breeding mechanics, including a technical explanation an how genes are represented in game.
                         </li>
                         <li>
                             <a href="https://docs.google.com/spreadsheets/u/0/d/11pRCX8G0xGizSYWgVhoUSu7pE-MV7AOprBcgSY1whB4/htmlview#">ACNH/ACNL Flower Genes</a> <br/>
-                            Spreadsheet of all the possible flower colors and their genotypes
+                            Spreadsheet of all the possible flower colors and their genotypes.
                         </li>
                         <li>
                             <a href="https://docs.google.com/document/d/1XPAaPUvGMWQ-n5sBLV3jM78QKxqKjiGCzx5HnD7K5RI/preview">Garden FAQ</a><br/>
-                            Long list of FAQs about flower breeding
+                            Long list of FAQs about flower breeding.
                         </li>
                         <li>
                             <a href="https://aeonsake.gitlab.io/acnh-flower-breeder/">Flower Breeding Simulator</a><br/>
@@ -81,7 +104,7 @@
                         </li>
                         <li>
                             <a href="https://aiterusawato.github.io/guides/acnh/flowers.html#bookcomplete-list-of-genotypes">Flowers — The Complete Guide</a><br/>
-                            A lot of useful information on flowers, also includes some information on weed mechanics
+                            A lot of useful information on flowers, also includes some information on weed mechanics.
                         </li>
                     </ul>
                 </div>
@@ -99,53 +122,19 @@
 <script>
     import FlowerGenetics from "./FlowerGenetics";
     import PunnettSquares from "./PunnettSquares";
+    import { GeneticsMixin } from "./Genetics.mixin"
+    import ListView from "./ListView";
 
     export default {
         name: "FlowerGuide",
-        components: {FlowerGenetics, PunnettSquares},
+        components: {ListView, FlowerGenetics, PunnettSquares},
+        mixins: [GeneticsMixin],
         data : function() {
             return {
                 selectedFlowerType: "Mums",
                 selectedViewType: "list-view",
                 openExplanation: false,
-                flowerTypes: ["Roses", "Mums", "Cosmos", "Lilies", "Pansies", "Hyacinths", "Tulips", "Windflowers"],
                 flowerData: {
-                    "Mums": {
-                        genotypes: [
-                            {genotype: "RRyyWW", color: "Red", origin: "seed"},
-                            {genotype: "RRyyWw", color: "Red"},
-                            {genotype: "RRyyww", color: "Red"},
-                            {genotype: "RrYyWw", color: "Red"},
-                            {genotype: "RRYyww", color: "Red"},
-                            {genotype: "RRYYww", color: "Red"},
-
-                            {genotype: "rrYyww", color: "White"},
-                            {genotype: "rryyWW", color: "White"},
-                            {genotype: "rryyWw", color: "White", origin: "seed"},
-
-                            {genotype: "rrYyWW", color: "Yellow"},
-                            {genotype: "rrYyWw", color: "Yellow"},
-                            {genotype: "rrYYWW", color: "Yellow", origin: "seed"},
-                            {genotype: "rrYYWw", color: "Yellow"},
-                            {genotype: "rrYYww", color: "Yellow"},
-                            {genotype: "RrYyWW", color: "Yellow"},
-
-                            {genotype: "RryyWW", color: "Pink"},
-                            {genotype: "RryyWw", color: "Pink"},
-                            {genotype: "Rryyww", color: "Pink"},
-                            {genotype: "RrYyww", color: "Pink", origin: "mystery island"},
-
-                            {genotype: "rryyww", color: "Purple"},
-                            {genotype: "RrYYWW", color: "Purple"},
-                            {genotype: "RrYYWw", color: "Purple"},
-                            {genotype: "RrYYww", color: "Purple"},
-                            {genotype: "RRYyWW", color: "Purple"},
-                            {genotype: "RRYyWw", color: "Purple", origin: "mystery island"},
-
-                            {genotype: "RRYYWW", color: "Green"},
-                            {genotype: "RRYYWw", color: "Green"}
-                        ]
-                    },
                     "Roses": {
                         genotypes: [
                             {genotype: "rryyWWss",color: "White"},
@@ -238,6 +227,42 @@
                             {genotype: "RRYYwwss",color: "Blue"}
                         ]
                     },
+                    "Mums": {
+                        genotypes: [
+                            {genotype: "RRyyWW", color: "Red", origin: "seed"},
+                            {genotype: "RRyyWw", color: "Red"},
+                            {genotype: "RRyyww", color: "Red"},
+                            {genotype: "RrYyWw", color: "Red"},
+                            {genotype: "RRYyww", color: "Red"},
+                            {genotype: "RRYYww", color: "Red"},
+
+                            {genotype: "rrYyww", color: "White"},
+                            {genotype: "rryyWW", color: "White"},
+                            {genotype: "rryyWw", color: "White", origin: "seed"},
+
+                            {genotype: "rrYyWW", color: "Yellow"},
+                            {genotype: "rrYyWw", color: "Yellow"},
+                            {genotype: "rrYYWW", color: "Yellow", origin: "seed"},
+                            {genotype: "rrYYWw", color: "Yellow"},
+                            {genotype: "rrYYww", color: "Yellow"},
+                            {genotype: "RrYyWW", color: "Yellow"},
+
+                            {genotype: "RryyWW", color: "Pink"},
+                            {genotype: "RryyWw", color: "Pink"},
+                            {genotype: "Rryyww", color: "Pink"},
+                            {genotype: "RrYyww", color: "Pink", origin: "mystery island"},
+
+                            {genotype: "rryyww", color: "Purple"},
+                            {genotype: "RrYYWW", color: "Purple"},
+                            {genotype: "RrYYWw", color: "Purple"},
+                            {genotype: "RrYYww", color: "Purple"},
+                            {genotype: "RRYyWW", color: "Purple"},
+                            {genotype: "RRYyWw", color: "Purple", origin: "mystery island"},
+
+                            {genotype: "RRYYWW", color: "Green"},
+                            {genotype: "RRYYWw", color: "Green"}
+                        ]
+                    },
                     "Cosmos": {
                         genotypes: [
                             {genotype:"rryyss", color:"White"},
@@ -270,7 +295,6 @@
                         ]
                     },
                     "Lilies": {
-                        description: "Lilies have three genes, R (red), Y (yellow) and S (Shade).",
                         genotypes: [
                             {genotype:"rryyss", color: "White"},
                             {genotype:"rryySs", color: "White"},
@@ -455,6 +479,8 @@
         font-weight: bold;
         padding: 10px;
         cursor: pointer;
+        background: #dedede;
+        border-radius: 10px 10px 0 0;
     }
 
     .explanation-body {
@@ -467,6 +493,22 @@
 
     .explanation-body li {
         margin: 18px 0;
+    }
+
+    .forked-line {
+        margin: auto;
+        border-collapse: collapse;
+    }
+
+    .forked-line td {
+        border: 2px solid #d2d2d2;
+        padding: 5px 10px;
+    }
+
+    .grid-view {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
     }
 
     .option-select {

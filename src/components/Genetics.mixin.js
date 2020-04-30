@@ -1,24 +1,16 @@
 export const GeneticsMixin = {
     methods: {
-        getOutcomes(flower1, flower2) {
-            if (!flower1 || !flower2) {
-                return '';
+        getOutcomes(genotype1, genotype2, allGenotypes) {
+            if (!genotype1 || !genotype2) {
+                return {};
             }
 
-            let geneCombinations = this.allGeneCombinations(flower1.genotype, flower2.genotype);
+            let geneCombinations = this.allGeneCombinations(genotype1, genotype2);
             let combinations = this.arrayCombinations(geneCombinations);
+
             let totalCombinations = combinations.length;
 
-            let outcomeData = {};
-
-            // Group by genotype and count number of occurrences
-            for (let combination of combinations) {
-                if (combination in outcomeData) {
-                    outcomeData[combination].total += 1;
-                } else {
-                    outcomeData[combination] = {total: 1};
-                }
-            }
+            let outcomeData = this.groupByNumOccurrences(combinations);
 
             let groupedByColor = {};
 
@@ -27,7 +19,7 @@ export const GeneticsMixin = {
             // Group by colour and sum up each color's overall chance of occurring
             for (let key in outcomeData) {
                 outcomeData[key].percent = (outcomeData[key].total / totalCombinations) * 100;
-                let color = this.genotypes.find(f => f.genotype === key).color;
+                let color = allGenotypes.find(f => f.genotype === key).color;
 
                 if (color in groupedByColor) {
                     groupedByColor[color].outcomes.push(
@@ -45,6 +37,20 @@ export const GeneticsMixin = {
             }
 
             return groupedByColor;
+        },
+        groupByNumOccurrences(arr) {
+            let outcomeData = {};
+
+            // Group by genotype and count number of occurrences
+            for (let el of arr) {
+                if (el in outcomeData) {
+                    outcomeData[el].total += 1;
+                } else {
+                    outcomeData[el] = {total: 1};
+                }
+            }
+
+            return outcomeData;
         },
         allGeneCombinations(genotype1, genotype2) {
             let genes1 = genotype1.match(/.{1,2}/g);
