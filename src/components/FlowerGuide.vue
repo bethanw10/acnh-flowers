@@ -24,8 +24,11 @@
                 </div>
                 <div class="explanation-body" v-show="openExplanation">
                     <p>
-                        Flowers have a number of genes that control their color - usually 3, expect for roses which have 4.
+                        Flowers have a number of genes that control their color.
+                        Most flowers use <strong>R (red)</strong>, <strong>(Y) yellow</strong> and <strong>(W) white</strong>.
+                        Roses are unique because they make use of the 4th gene - <strong> S (Shade) </strong>.
                         A gene is made of a pair of alleles which can be dominant (represented by a uppercase letter) or recessive (represented by a lowercase letter).
+                        For example, a dominant red gene is written as <strong>R</strong>, and a recessive red gene is written as <strong>r</strong>.
                     </p>
                     <p>
                         When cross breeding flowers, one allele is taken from each parent at random for each gene. The possible outcomes can be predicted using a
@@ -34,6 +37,8 @@
                     <p>For example, when breeding two flowers where both flowers have the gene 'Rr':</p>
                     <PunnettSquares genotype1="Rr" genotype2="Rr"/>
                     <p>The possible outcomes for this pair are RR, Rr and rr. Since Rr appears twice in the square it has a 50% chance of occurring, while RR and rr have a 25% chance.</p>
+
+                    <p>This is done for each gene to work out what the final genotype is.</p>
 
                     <p>Flower from seed bags and mystery island flowers will always have the same genes.
                         It's helpful to start cross breeding with these flowers so you can more easily track what genes your flowers have.</p>
@@ -60,7 +65,7 @@
                         </li>
                         <li>
                             <a href="https://docs.google.com/document/u/0/d/1ARIQCUc5YVEd01D7jtJT9EEJF45m07NXhAm4fOpNvCs/mobilebasic">ACNH/ACNL Advanced Flower Genetics </a><br/>
-                            A more in depth guide into the flower breeding mechanics, including a technical explanantion an how genes are represented in game
+                            A more in depth guide into the flower breeding mechanics, including a technical explanation an how genes are represented in game
                         </li>
                         <li>
                             <a href="https://docs.google.com/spreadsheets/u/0/d/11pRCX8G0xGizSYWgVhoUSu7pE-MV7AOprBcgSY1whB4/htmlview#">ACNH/ACNL Flower Genes</a> <br/>
@@ -76,7 +81,7 @@
                         </li>
                         <li>
                             <a href="https://aiterusawato.github.io/guides/acnh/flowers.html#bookcomplete-list-of-genotypes">Flowers — The Complete Guide</a><br/>
-                            A lot of useful information on flowers, also includes some information on weed mechanices
+                            A lot of useful information on flowers, also includes some information on weed mechanics
                         </li>
                     </ul>
                 </div>
@@ -106,7 +111,6 @@
                 flowerTypes: ["Roses", "Mums", "Cosmos", "Lilies", "Pansies", "Hyacinths", "Tulips", "Windflowers"],
                 flowerData: {
                     "Mums": {
-                        description: "Mums have three genes, R (red), Y (yellow) and W (white).",
                         genotypes: [
                             {genotype: "RRyyWW", color: "Red", origin: "seed"},
                             {genotype: "RRyyWw", color: "Red"},
@@ -143,7 +147,6 @@
                         ]
                     },
                     "Roses": {
-                        description: "Roses have four genes, R (red), Y (yellow),  W (white) and S (shade).",
                         genotypes: [
                             {genotype: "rryyWWss",color: "White"},
                             {genotype: "rryyWWSs",color: "White"},
@@ -236,7 +239,6 @@
                         ]
                     },
                     "Cosmos": {
-                        description: "Cosmos have three genes, R (red), Y (yellow) and S (Shade).",
                         genotypes: [
                             {genotype:"rryyss", color:"White"},
                             {genotype:"rryySs", color:"White", origin : "seed"},
@@ -300,7 +302,6 @@
                         ]
                     },
                     "Pansies": {
-                        description: "Lilies have three genes, R (red), Y (yellow) and W (White).",
                         genotypes: [
                             {genotype:"rryyWW", color: "White"},
                             {genotype:"rryyWw", color: "White", origin:"seed"},
@@ -332,7 +333,6 @@
                         ]
                     },
                     "Hyacinths": {
-                        description: "Hyacinths have three genes, R (red), Y (yellow) and W (White).",
                         genotypes: [
                             {genotype:"rryyWW", color: "White"},
                             {genotype:"rryyWw", color: "White", origin: "seed"},
@@ -364,7 +364,6 @@
                         ]
                     },
                     "Tulips": {
-                        description: "Cosmos have three genes, R (red), Y (yellow) and S (Shade).",
                         genotypes: [
                             {genotype:"rryyss", color: "White"},
                             {genotype:"rryySs", color: "White", origin: "seed"},
@@ -396,7 +395,6 @@
                         ]
                     },
                     "Windflowers": {
-                        description: "Windflowers have three genes, R (red), O (Orange) and W (White).",
                         genotypes: [
                             {genotype: "rrooWW", color:"White"},
                             {genotype: "rrooWw", color:"White", origin:"seed"},
@@ -441,10 +439,6 @@
         justify-content: center;
         align-items: center;
         margin-top: 0;
-    }
-
-    .description {
-        text-align: center;
     }
 
     .explanation {

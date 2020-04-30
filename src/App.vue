@@ -21,7 +21,7 @@ export default {
   }
 
   body {
-    background-color: #d9eee3;
+    background-color: #bcdec2;
     display: flex;
   }
 
