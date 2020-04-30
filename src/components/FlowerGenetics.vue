@@ -61,10 +61,17 @@
     }
 
     .genotype-form {
+        margin: 30px 0;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 30px 0;
+    }
+
+    @media only screen and (max-width: 992px) {
+        .genotype-form  {
+            flex-direction: column;
+            width: 100%;
+        }
     }
 
     .plus {

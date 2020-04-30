@@ -68,12 +68,14 @@
 <style scoped>
     .genotype-select {
         display: flex;
+        width: 100%;
     }
 
     .container {
         display: flex;
         flex-direction: column;
         margin-left: 15px;
+        width: 100%;
     }
 
     label {

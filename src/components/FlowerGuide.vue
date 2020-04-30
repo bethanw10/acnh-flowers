@@ -17,7 +17,8 @@
 
             <div class="explanation">
                 <div class="explanation-header" v-on:click="openExplanation = !openExplanation">
-                    Explanation
+                    <div/>
+                    {{openExplanation ? 'Hide explanation' : 'Show explanation'}}
                     <i class="accordion-arrow material-icons">
                         {{openExplanation ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}
                     </i>

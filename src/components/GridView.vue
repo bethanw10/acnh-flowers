@@ -52,4 +52,8 @@
         grid-gap: 10px 25px;
         text-align: start;
     }
+
+    .outcome-sub-grid div:nth-child(2n) {
+        text-align: center;
+    }
 </style>
