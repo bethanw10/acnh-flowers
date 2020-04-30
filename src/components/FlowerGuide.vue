@@ -479,8 +479,6 @@
         font-weight: bold;
         padding: 10px;
         cursor: pointer;
-        background: #dedede;
-        border-radius: 10px 10px 0 0;
     }
 
     .explanation-body {
