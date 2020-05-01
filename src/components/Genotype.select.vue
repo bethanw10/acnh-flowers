@@ -75,7 +75,12 @@
         display: flex;
         flex-direction: column;
         margin-left: 15px;
-        width: 100%;
+    }
+
+    @media only screen and (max-width: 992px) {
+        .container {
+            width: 100%;
+        }
     }
 
     label {
