@@ -1,5 +1,5 @@
 <template>
-    <table class="outcome-table">
+    <table class="outcome-table responsive-text">
         <tbody v-for="(colorData, color) in outcomes" v-bind:key="color">
         <tr class="header-row">
             <th :rowspan="colorData.outcomes.length + 1">
@@ -56,6 +56,12 @@
         padding: 3px 20px;
         font-size: 18px;
         font-weight: bold;
+    }
+
+    @media only screen and (max-width: 992px) {
+        .outcome-table th{
+            font-size: calc(18px + 1vw);
+        }
     }
 
     .color-header {

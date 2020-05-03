@@ -1,5 +1,5 @@
 <template>
-    <div class="punnett-squares">
+    <div class="punnett-squares responsive-text">
         <div class="punnett-square" v-for="(combination, index) in allGeneCombinations(genotype1, genotype2)"
              :key="index">
             <table>

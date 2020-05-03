@@ -3,8 +3,8 @@
         <flower-image :color="selectedGenotype.color" :flowerType="flowerType"/>
 
         <div class="container">
-            <label class="label">{{label}}</label>
-            <select class="dropdown" v-model="selectedGenotype" v-on:change="updateValue()">
+            <label class="label responsive-text">{{label}}</label>
+            <select class="dropdown responsive-text" v-model="selectedGenotype" v-on:change="updateValue()">
                 <option value="" disabled hidden>Select a genotype</option>
                 <option v-for="(flower, index) in genotypes" v-bind:key="index" v-bind:value="flower"
                         :style="{ backgroundColor: flowerBackground(flower.color) }">
@@ -68,6 +68,7 @@
 <style scoped>
     .genotype-select {
         display: flex;
+        align-items: center;
         width: 100%;
     }
 
@@ -85,7 +86,6 @@
 
     label {
         font-weight: bold;
-        font-size: 14px;
         margin-right: 10px;
     }
 
@@ -94,7 +94,6 @@
         border-radius: 2px;
         padding: 5px;
         font-family: 'Source Code Pro', monospace;
-        font-size: 14px;
         margin: 10px 0;
     }
 </style>

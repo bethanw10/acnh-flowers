@@ -1,5 +1,5 @@
 <template>
-    <div class="outcome-grid">
+    <div class="outcome-grid responsive-text ">
         <div class="outcome-grid-header"></div>
         <div class="outcome-grid-header">Color</div>
         <div class="outcome-grid-header">Chance</div>
