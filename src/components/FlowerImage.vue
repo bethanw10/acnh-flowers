@@ -1,8 +1,8 @@
 <template>
-    <img v-if="color && flowerType" class="flower-image"
-         :src="flowerImage()"
-         :alt="color + ' ' + flowerType"/>
-    <div v-else class="flower-image"></div>
+    <img :alt="color + ' ' + flowerType" :src="flowerImage()"
+         class="flower-image"
+         v-if="color && flowerType"/>
+    <div class="flower-image" v-else></div>
 </template>
 
 <script>
@@ -103,6 +103,7 @@
 
 <style scoped>
     .flower-image {
+        flex-shrink: 0;
         width: 60px;
         height: 60px;
         padding: 5px;

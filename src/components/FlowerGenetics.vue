@@ -1,26 +1,26 @@
 <template>
     <div>
         <div class="genotype-form">
-            <genotype-select label="First flower" :flower-type="flowerType" :genotypes="genotypes"
+            <genotype-select :flower-type="flowerType" :genotypes="genotypes" label="First flower"
                              v-model="firstFlower"/>
             <span class="plus">➕</span>
-            <genotype-select label="Second flower" :flower-type="flowerType" :genotypes="genotypes"
+            <genotype-select :flower-type="flowerType" :genotypes="genotypes" label="Second flower"
                              v-model="secondFlower"/>
         </div>
         <div class="outcomes">
             <PunnettSquares
-                    class="punnett-squares-view"
-                    v-if="viewType === 'punnett-squares' && firstFlower && secondFlower"
                     :genotype1="firstFlower.genotype"
-                    :genotype2="secondFlower.genotype"/>
+                    :genotype2="secondFlower.genotype"
+                    class="punnett-squares-view"
+                    v-if="viewType === 'punnett-squares' && firstFlower && secondFlower"/>
 
-            <ListView v-if="viewType === 'list-view' || viewType === 'punnett-squares'"
-                      :flower-type="flowerType"
+            <ListView :flower-type="flowerType"
                       :outcomes="getOutcomes(firstFlower.genotype, secondFlower.genotype, genotypes)"
+                      v-if="viewType === 'list-view' || viewType === 'punnett-squares'"
             />
-            <GridView v-else-if="firstFlower && secondFlower"
-                      :flower-type="flowerType"
+            <GridView :flower-type="flowerType"
                       :outcomes="getOutcomes(firstFlower.genotype, secondFlower.genotype, genotypes)"
+                      v-else-if="firstFlower && secondFlower"
             />
         </div>
     </div>

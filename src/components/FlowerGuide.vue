@@ -3,8 +3,8 @@
         <header>
             <h1>ACNH Guide for
                 <select class="option-select" v-model="selectedFlowerType">
-                    <option v-for="flowerType in Object.keys(flowerData)" v-bind:key="flowerType"
-                            v-bind:value="flowerType">
+                    <option v-bind:key="flowerType" v-bind:value="flowerType"
+                            v-for="flowerType in Object.keys(flowerData)">
                         {{flowerType}}
                     </option>
                 </select>
@@ -86,8 +86,8 @@
                     <p>These combination of these genes can result in these flowers:</p>
 
                     <div class="grid-view">
-                        <ListView flower-type="Cosmos"
-                                  :outcomes="getOutcomes('rrYYSs', 'RRYySs', flowerData['Cosmos'].genotypes)"/>
+                        <ListView :outcomes="getOutcomes('rrYYSs', 'RRYySs', flowerData['Cosmos'].genotypes)"
+                                  flower-type="Cosmos"/>
                     </div>
 
                     <p>Unfortunately, there's no easy way to check a flower's genotype in game. If you breed the flowers
@@ -167,8 +167,8 @@
         </header>
         <FlowerGenetics
                 :flowerType="selectedFlowerType"
-                :viewType="selectedViewType"
                 :genotypes="flowerData[selectedFlowerType].genotypes"
+                :viewType="selectedViewType"
         />
     </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
     <table class="outcome-table responsive-text">
-        <tbody v-for="(colorData, color) in outcomes" v-bind:key="color">
+        <tbody v-bind:key="color" v-for="(colorData, color) in outcomes">
         <tr class="header-row">
             <th :rowspan="colorData.outcomes.length + 1">
                 <flower-image :color="color" :flower-type="flowerType" v-bind:key="color"/>
@@ -8,7 +8,7 @@
             <th class="color-header">{{color}}</th>
             <th>{{colorData.percent}}%</th>
         </tr>
-        <tr v-for="outcome in colorData.outcomes" v-bind:key="outcome.genotype">
+        <tr v-bind:key="outcome.genotype" v-for="outcome in colorData.outcomes">
             <td>{{outcome.genotype.match(/(.{2})/g).join(' ')}}</td>
             <td>{{outcome.percent}}%</td>
         </tr>

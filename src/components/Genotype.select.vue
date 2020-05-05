@@ -5,9 +5,9 @@
         <div class="container">
             <label class="label responsive-text">{{label}}</label>
             <select class="dropdown responsive-text" v-model="selectedGenotype" v-on:change="updateValue()">
-                <option value="" disabled hidden>Select a genotype</option>
-                <option v-for="(flower, index) in genotypes" v-bind:key="index" v-bind:value="flower"
-                        :style="{ backgroundColor: flowerBackground(flower.color) }">
+                <option disabled hidden value="">Select a genotype</option>
+                <option :style="{ backgroundColor: flowerBackground(flower.color) }" v-bind:key="index" v-bind:value="flower"
+                        v-for="(flower, index) in genotypes">
                     {{displayValue(flower)}}
                 </option>
             </select>
