@@ -3,15 +3,28 @@
         <div class="punnett-square" v-for="(combination, index) in allGeneCombinations(genotype1, genotype2)"
              :key="index">
             <table>
-                <tr><td></td>                           <td>{{genotype1[index*2]}}</td> <td>{{genotype1[index*2 + 1]}}</td></tr>
-                <tr><td>{{genotype2[index*2]}}</td>     <td>{{combination[0]}}</td>     <td>{{combination[1]}}</td></tr>
-                <tr><td>{{genotype2[index*2 + 1]}}</td> <td>{{combination[2]}}</td>     <td>{{combination[3]}}</td></tr>
-                <tr><td></td>
+                <tr>
+                    <td></td>
+                    <td>{{genotype1[index*2]}}</td>
+                    <td>{{genotype1[index*2 + 1]}}</td>
+                </tr>
+                <tr>
+                    <td>{{genotype2[index*2]}}</td>
+                    <td>{{combination[0]}}</td>
+                    <td>{{combination[1]}}</td>
+                </tr>
+                <tr>
+                    <td>{{genotype2[index*2 + 1]}}</td>
+                    <td>{{combination[2]}}</td>
+                    <td>{{combination[3]}}</td>
+                </tr>
+                <tr>
+                    <td></td>
                     <td colspan="3">
                         <template v-for="(outcome, gene) in outcomeTotals(combination)">
                             <span :key="gene"><b>{{gene}}</b> {{outcome.percent}}%<br/></span>
                         </template>
-                     </td>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -62,7 +75,7 @@
         margin: 0 10px;
     }
 
-    .punnett-square table tr:first-child td, .punnett-square table tr:last-child td{
+    .punnett-square table tr:first-child td, .punnett-square table tr:last-child td {
         border: none;
         border-right: 2px solid #d2d2d2;
         border-bottom: 2px solid #d2d2d2;

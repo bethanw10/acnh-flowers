@@ -18,9 +18,10 @@
 
 <script>
     import FlowerImage from "./FlowerImage";
+
     export default {
         name: "ListView",
-        components: { FlowerImage},
+        components: {FlowerImage},
         props: {
             flowerType: String,
             outcomes: Object
@@ -33,8 +34,7 @@
         border-spacing: 0;
     }
 
-    .outcome-table tbody::after
-    {
+    .outcome-table tbody::after {
         content: '';
         display: block;
         height: 30px;
@@ -49,7 +49,7 @@
     }
 
     .outcome-table td {
-        padding:  3px 20px;
+        padding: 3px 20px;
     }
 
     .outcome-table th {
@@ -59,7 +59,7 @@
     }
 
     @media only screen and (max-width: 992px) {
-        .outcome-table th{
+        .outcome-table th {
             font-size: calc(18px + 1vw);
         }
     }

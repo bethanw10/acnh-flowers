@@ -10,7 +10,8 @@
             <div v-bind:key="'percent-'+ color">{{colorData.percent}}%</div>
             <div class="outcome-sub-grid" v-bind:key="color">
                 <template v-for="outcome in colorData.outcomes">
-                    <div v-bind:key="'genotype-' + outcome.genotype">{{outcome.genotype.match(/(.{2})/g).join(' ')}}</div>
+                    <div v-bind:key="'genotype-' + outcome.genotype">{{outcome.genotype.match(/(.{2})/g).join(' ')}}
+                    </div>
                     <div v-bind:key="'percent-' + outcome.genotype">{{outcome.percent}}%</div>
                 </template>
             </div>
@@ -20,9 +21,10 @@
 
 <script>
     import FlowerImage from "./FlowerImage";
+
     export default {
         name: "GridView",
-        components: { FlowerImage},
+        components: {FlowerImage},
         props: {
             flowerType: String,
             outcomes: Object

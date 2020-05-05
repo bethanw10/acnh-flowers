@@ -26,7 +26,7 @@
             flowerType: String,
             genotypes: Array,
         },
-        data: function() {
+        data: function () {
             return {
                 selectedGenotype: ''
             };

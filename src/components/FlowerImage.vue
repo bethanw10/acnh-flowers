@@ -2,7 +2,7 @@
     <img v-if="color && flowerType" class="flower-image"
          :src="flowerImage()"
          :alt="color + ' ' + flowerType"/>
-    <div v-else class="flower-image"/>
+    <div v-else class="flower-image"></div>
 </template>
 
 <script>
@@ -10,7 +10,7 @@
         name: "FlowerImage",
         data() {
             return {
-                imageUrls : {
+                imageUrls: {
                     "Mums": {
                         ["Red"]: "https://acnhcdn.com/latest/MenuIcon/PltMum2.png",
                         ["Pink"]: "https://acnhcdn.com/latest/MenuIcon/PltMum3.png",
@@ -19,7 +19,7 @@
                         ["Green"]: "https://acnhcdn.com/latest/MenuIcon/PltMum4.png",
                         ["Yellow"]: "https://acnhcdn.com/latest/MenuIcon/PltMum1.png"
                     },
-                    "Roses":{
+                    "Roses": {
                         ["Red"]: "https://acnhcdn.com/latest/MenuIcon/Rose0.png",
                         ["White"]: "https://acnhcdn.com/latest/MenuIcon/Rose1.png",
                         ["Yellow"]: "https://acnhcdn.com/latest/MenuIcon/Rose2.png",

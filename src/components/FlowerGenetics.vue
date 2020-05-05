@@ -1,12 +1,15 @@
 <template>
     <div>
         <div class="genotype-form">
-            <genotype-select label="First flower" :flower-type="flowerType" :genotypes="genotypes" v-model="firstFlower"/>
+            <genotype-select label="First flower" :flower-type="flowerType" :genotypes="genotypes"
+                             v-model="firstFlower"/>
             <span class="plus">➕</span>
-            <genotype-select label= "Second flower" :flower-type="flowerType" :genotypes="genotypes" v-model="secondFlower"/>
+            <genotype-select label="Second flower" :flower-type="flowerType" :genotypes="genotypes"
+                             v-model="secondFlower"/>
         </div>
         <div class="outcomes">
             <PunnettSquares
+                    class="punnett-squares-view"
                     v-if="viewType === 'punnett-squares' && firstFlower && secondFlower"
                     :genotype1="firstFlower.genotype"
                     :genotype2="secondFlower.genotype"/>
@@ -28,7 +31,7 @@
     import PunnettSquares from "./PunnettSquares";
     import ListView from "./ListView";
 
-    import { GeneticsMixin } from "./Genetics.mixin"
+    import {GeneticsMixin} from "./Genetics.mixin"
     import GridView from "./GridView";
 
     export default {
@@ -68,7 +71,7 @@
     }
 
     @media only screen and (max-width: 992px) {
-        .genotype-form  {
+        .genotype-form {
             flex-direction: column;
             width: 100%;
         }
@@ -84,7 +87,7 @@
         align-items: center;
     }
 
-    .punnett-squares {
+    .punnett-squares-view {
         margin-bottom: 30px;
     }
 
