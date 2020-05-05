@@ -131,24 +131,28 @@
                             guide is especially helpful.
                         </li>
                         <li>
-                            <a href="https://docs.google.com/document/d/1P0mJsxET4zaZxk2CqrKtorVI8GEavPHzy5lj2ZdV-nE/preview">Flower
-                                Layouts and Placements</a><br/>
+                            <a href="https://docs.google.com/document/d/1P0mJsxET4zaZxk2CqrKtorVI8GEavPHzy5lj2ZdV-nE/preview">
+                                Flower Layouts and Placements
+                            </a><br/>
                             A very useful layout guide. Explains why the checkerboard method isn't the best to use.
                         </li>
                         <li>
-                            <a href="https://docs.google.com/document/u/0/d/1ARIQCUc5YVEd01D7jtJT9EEJF45m07NXhAm4fOpNvCs/mobilebasic">ACNH/ACNL
-                                Advanced Flower Genetics </a><br/>
+                            <a href="https://docs.google.com/document/u/0/d/1ARIQCUc5YVEd01D7jtJT9EEJF45m07NXhAm4fOpNvCs/mobilebasic">
+                                ACNH/ACNL Advanced Flower Genetics
+                            </a><br/>
                             A more in depth guide into the flower breeding mechanics, including a technical explanation
                             an how genes are represented in game.
                         </li>
                         <li>
-                            <a href="https://docs.google.com/spreadsheets/u/0/d/11pRCX8G0xGizSYWgVhoUSu7pE-MV7AOprBcgSY1whB4/htmlview#">ACNH/ACNL
-                                Flower Genes</a> <br/>
+                            <a href="https://docs.google.com/spreadsheets/u/0/d/11pRCX8G0xGizSYWgVhoUSu7pE-MV7AOprBcgSY1whB4/htmlview#">
+                                ACNH/ACNL Flower Genes
+                            </a> <br/>
                             Spreadsheet of all the possible flower colors and their genotypes.
                         </li>
                         <li>
-                            <a href="https://docs.google.com/document/d/1XPAaPUvGMWQ-n5sBLV3jM78QKxqKjiGCzx5HnD7K5RI/preview">Garden
-                                FAQ</a><br/>
+                            <a href="https://docs.google.com/document/d/1XPAaPUvGMWQ-n5sBLV3jM78QKxqKjiGCzx5HnD7K5RI/preview">
+                                Garden FAQ
+                            </a><br/>
                             Long list of FAQs about flower breeding.
                         </li>
                         <li>
@@ -156,8 +160,9 @@
                             Very useful for planning layouts!
                         </li>
                         <li>
-                            <a href="https://aiterusawato.github.io/guides/acnh/flowers.html#bookcomplete-list-of-genotypes">Flowers
-                                — The Complete Guide</a><br/>
+                            <a href="https://aiterusawato.github.io/guides/acnh/flowers.html#bookcomplete-list-of-genotypes">
+                                Flowers — The Complete Guide
+                            </a><br/>
                             A lot of useful information on flowers, also includes some information on weed mechanics.
                         </li>
                     </ul>
